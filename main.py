@@ -39,10 +39,11 @@ def count_words():
 def count_characters():
     try:
         with open("./books/Frankenstein.txt") as f:
-            book = f.read().strip().lower()
-            count_characters = Counter(book)
+            book = f.read().lower()
+            letters = [char for char in book if char.isalpha()]
+            count_letters = Counter(letters)
 
-            for char, count in sorted(count_characters.items()):
+            for char, count in sorted(count_letters.items()):
                 print(f'{char}: {count}')           
 
     except FileNotFoundError:
