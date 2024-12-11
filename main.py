@@ -1,3 +1,5 @@
+from collections import Counter
+
 def menu():
     print("What you would you like to do?")
     print("Choose 1 to read the book, 2 to know how many words the book has, and 3 to count the characters.")
@@ -37,15 +39,13 @@ def count_words():
 def count_characters():
     try:
         with open("./books/Frankenstein.txt") as f:
-            book = f.read().strip()
-            count_characters = 0
+            book = f.read().strip().lower()
+            count_characters = Counter(book)
 
-            for letter in book:
-                count_characters += 1
+            for char, count in sorted(count_characters.items()):
+                print(f'{char}: {count}')           
 
-            print(count_characters)                
-
-    except FileExistsError:
+    except FileNotFoundError:
         print("Path to the book not found.")
 
 def main():
